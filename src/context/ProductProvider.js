@@ -15,6 +15,8 @@ const ProductProvider = ({children}) => {
           .catch(dispatch({type: actionTypes.FETCHING_ERROR}))
    }, [])
 
+   console.log(state)
+
   const value = {
      state,
      dispatch,
