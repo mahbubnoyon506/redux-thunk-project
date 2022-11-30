@@ -1,10 +1,13 @@
 import React from "react";
 import { BiListPlus } from "react-icons/bi";
+import { useLocation } from "react-router-dom";
 import { useProducts } from "../context/ProductProvider";
 import { actionTypes } from "../state/ProductState/actionTypes";
 
 const ProductCard = ({ product }) => {
   const { dispatch } = useProducts();
+
+  const { pathname } = useLocation()
 
   return (
     <div
@@ -24,6 +27,8 @@ const ProductCard = ({ product }) => {
         </ul>
       </div>
       <div className='flex gap-2 mt-5'>
+        {
+          !pathname.includes('cart') &&
         <button
           className='bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold'
           onClick={() =>
@@ -32,13 +37,26 @@ const ProductCard = ({ product }) => {
         >
           Add to cart
         </button>
+        }
+        {
+          (!pathname.includes('cart') && !pathname.includes('wishlist')) &&
         <button
           title='Add to wishlist'
           className='bg-indigo-500  py-1 px-2 rounded-full'
-          onClick={ () => dispatch({type: actionTypes.ADD_TO_WISHLIST, payload: product})}
+          onClick={() => dispatch({ type: actionTypes.ADD_TO_WISHLIST, payload: product })}
         >
           <BiListPlus className='text-white' />
         </button>
+        }
+        {
+          pathname.includes('cart') &&
+          <button
+            title='Make Payment'
+            className='bg-indigo-500  py-1 px-2 rounded-full text-white w-full'
+          >
+            Make Payment
+          </button>
+        }
       </div>
     </div>
   );

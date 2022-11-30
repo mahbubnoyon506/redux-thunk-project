@@ -1,5 +1,4 @@
 import React from "react";
-import CartProduct from "../components/CartProduct";
 import ProductCard from "../components/ProductCard";
 import { useProducts } from "../context/ProductProvider";
 
@@ -14,7 +13,7 @@ const Cart = () => {
   }else if(!loading && !error && cart.length === 0){
     content = <p>No product found</p>
   }else if(!loading && !error && cart.length){
-    content = cart.map((product) => <CartProduct key={product.id} product={product}></CartProduct>
+    content = cart.map((product) => <ProductCard key={product.id} product={product}></ProductCard>
    )
   }
 
