@@ -12,7 +12,7 @@ const Cart = () => {
   }else if(error){
     content = <p>Something went wrong</p>
   }else if(!loading && !error && cart.length === 0){
-    content = <p>No product fount</p>
+    content = <p>No product found</p>
   }else if(!loading && !error && cart.length){
     content = cart.map((product) => <CartProduct key={product.id} product={product}></CartProduct>
    )

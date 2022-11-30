@@ -11,7 +11,7 @@ const Home = () => {
   }else if(error){
     content = <p>Something went wrong</p>
   }else if(!loading && !error && products.length === 0){
-    content = <p>No product fount</p>
+    content = <p>No product found</p>
   }else if(!loading && !error && products.length){
     content = products.map((product) => <ProductCard key={product.id} product={product}></ProductCard>
    )

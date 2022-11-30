@@ -13,7 +13,7 @@ const TopRated = () => {
   }else if(error){
     content = <p>Something went wrong</p>
   }else if(!loading && !error && products.length === 0){
-    content = <p>No product fount</p>
+    content = <p>No product found</p>
   }else if(!loading && !error && products.length){
     content = products.filter((product) => product.rating >= 4).map((product) => <ProductCard key={product.id} product={product}></ProductCard>
    )

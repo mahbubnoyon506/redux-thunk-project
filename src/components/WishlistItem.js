@@ -3,7 +3,7 @@ import { BiListPlus } from "react-icons/bi";
 import { useProducts } from "../context/ProductProvider";
 import { actionTypes } from "../state/ProductState/actionTypes";
 
-const CartProduct = ({ product }) => {
+const WishlistItem = ({ product }) => {
   const { dispatch } = useProducts();
 
   return (
@@ -26,13 +26,13 @@ const CartProduct = ({ product }) => {
       <div className='flex gap-2 mt-5'>
         <button
           className='bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold'
-          
-        >
-          Make Payment
+          onClick={() => dispatch({action: actionTypes.ADD_TO_CART, payload: product})}
+       >
+          Add to Cart
         </button>
       </div>
     </div>
   );
 };
 
-export default CartProduct;
+export default WishlistItem;
