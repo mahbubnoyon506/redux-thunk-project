@@ -1,19 +1,29 @@
 import React from "react";
 import { BiListPlus } from "react-icons/bi";
+import { FaTrashAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useProducts } from "../context/ProductProvider";
+import { addToCart, removeFromCart } from "../redux/actionCreators/productAction";
+import { ADD_TO_CART } from "../redux/actionTypes/actionTypes";
 import { actionTypes } from "../state/ProductState/actionTypes";
 
 const ProductCard = ({ product }) => {
-  const { dispatch } = useProducts();
+  // const { dispatch } = useProducts();
+
+  const dispatch = useDispatch()
 
   const { pathname } = useLocation()
 
   return (
     <div
-      className='shadow-lg rounded-3xl border  p-3 flex flex-col text-indigo-900'
+      className='shadow-lg rounded-3xl border  p-3 flex flex-col text-indigo-900 relative'
       key={product._id}
     >
+      {
+        pathname.includes('cart') && 
+      <div className="absolute w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center"><p className="text-white">{product.quantity}</p></div>
+      }
       <div className='h-52 w-52 mx-auto'>
         <img src={product.image} alt={product.model} />
       </div>
@@ -26,14 +36,15 @@ const ProductCard = ({ product }) => {
           })}
         </ul>
       </div>
-      <div className='flex gap-2 mt-5'>
+      <div className='flex justify-center items-center gap-2 mt-5'>
         {
           !pathname.includes('cart') &&
         <button
           className='bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold'
-          onClick={() =>
-            dispatch({ type: actionTypes.ADD_TO_CART, payload: product })
-          }
+          // onClick={() =>
+          //   dispatch({ type: actionTypes.ADD_TO_CART, payload: product })
+          // }
+          onClick={() => dispatch(addToCart(product))}
         >
           Add to cart
         </button>
@@ -50,12 +61,16 @@ const ProductCard = ({ product }) => {
         }
         {
           pathname.includes('cart') &&
+          <>
+          
           <button
             title='Make Payment'
-            className='bg-indigo-500  py-1 px-2 rounded-full text-white w-full'
+            className='bg-indigo-500  py-1 px-2 rounded-full text-white w-full mr-2'
           >
             Make Payment
           </button>
+          <FaTrashAlt onClick={() => dispatch(removeFromCart(product))} className="cursor-pointer text-red-600" size={30}/>
+          </>
         }
       </div>
     </div>
