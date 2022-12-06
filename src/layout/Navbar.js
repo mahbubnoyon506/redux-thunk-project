@@ -17,6 +17,9 @@ const Navbar = () => {
         <li>
           <Link to='/about'>About</Link>
         </li>
+        <li>
+          <Link to='/dashboard'>Dashboard</Link>
+        </li>
         <Link to='/wishlist'>
           <li title='Wishlist' className='bg-indigo-500 p-2 rounded-full'>
             <IoIosListBox className='text-white' />
