@@ -48,7 +48,6 @@ const routes = createBrowserRouter([
         path:'add-product',
         element:<AddProduct/>
       }
-
     ]
   }
 ]);
