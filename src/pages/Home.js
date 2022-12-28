@@ -6,6 +6,7 @@ import ProductCard from "../components/ProductCard";
 import { useProducts } from "../context/ProductProvider";
 import { toggleBrand } from "../redux/actionCreators/filterAction";
 import { toggleStock } from "../redux/actionCreators/filterAction";
+import { loadProduct } from "../redux/actionCreators/productAction";
 
 const Home = () => {
   // const {state: {products, loading, error}} = useProducts();
@@ -23,12 +24,12 @@ const Home = () => {
           .then(data => setProducts(data))
       }
     )()
-  }, [])
+  }, [dispatch])
 
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.product.products);
   const filters = useSelector(state => state.filter.filter)
   const { brands, stock } = filters;
-  console.log(brands, stock);
+  console.log(state);
 
 
   // let content;
