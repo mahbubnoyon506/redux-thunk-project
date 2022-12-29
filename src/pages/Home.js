@@ -7,9 +7,13 @@ import { useProducts } from "../context/ProductProvider";
 import { toggleBrand } from "../redux/actionCreators/filterAction";
 import { toggleStock } from "../redux/actionCreators/filterAction";
 import { loadProduct } from "../redux/actionCreators/productAction";
+import getProducts from "../redux/thunk/products/fetchProducts";
 
 const Home = () => {
   // const {state: {products, loading, error}} = useProducts();
+  // const products = useSelector((state) => state.product.products);
+  const filters = useSelector(state => state.filter.filter)
+  const { brands, stock } = filters;
 
   const dispatch = useDispatch()
 
@@ -24,12 +28,11 @@ const Home = () => {
           .then(data => setProducts(data))
       }
     )()
+
+    // dispatch(getProducts())
   }, [dispatch])
 
-  const state = useSelector((state) => state.product.products);
-  const filters = useSelector(state => state.filter.filter)
-  const { brands, stock } = filters;
-  console.log(state);
+  // console.log(products);
 
 
   // let content;
@@ -46,8 +49,8 @@ const Home = () => {
 
   const activeClass = "text-white  bg-indigo-500 border-white";
   let content = '';
-  if (products.length) {
-    content = products.map((product) => (
+  if (products?.length) {
+    content = products?.map((product) => (
       <ProductCard key={product.model} product={product} />
     ))
   }
